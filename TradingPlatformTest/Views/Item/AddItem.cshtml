@@ -1,0 +1,57 @@
+﻿
+@model ItemAddViewModel;
+
+@{
+    ViewData["Title"] = "Add item";
+}
+
+@{
+    if (Model?.Status == Status.Added)
+    {
+        <h2>Your item has been added</h2>
+    }
+    else
+    {
+        <h2>Please enter item listing information</h2>
+        <form asp-controller="Item" asp-action="AddItem" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <div>
+                <label asp-for="Name"></label><br />
+                <input type="text" /><br />
+            </div>
+
+            <div>
+                <label asp-for="Description"></label><br />
+                <textarea name="Description" asp-for="Description" rows="10" cols="20"> </textarea><br />
+            </div>
+
+            <div>
+                <label asp-for="File">Upload image</label><br />
+                <input type="file" name="Upload" /><br />
+            </div>
+
+
+            <div>
+                <label asp-for="File">Price, @ViewData["Currency"]</label><br />
+                <input type="number" name="Price" /><br />
+            </div>
+
+            <div>
+                <label asp-for="IsService">Is this a service?</label><br />
+                <input type="checkbox" name="Service" /><br />
+            </div>
+
+            <div>
+                <label asp-for="IsMultiCountryPossible">Is shipment/execution to another country possible?</label><br />
+                <input type="checkbox" name="MultiCountry" /><br />
+            </div>
+
+            <div>
+                <input type="submit" value="Add" />
+            </div>
+
+        </form>
+    }
+
+
+}

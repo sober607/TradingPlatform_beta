@@ -1,0 +1,20 @@
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TradingPlatformTest.Models
+{
+    public class User : IdentityUser
+    {
+
+        public virtual List<Item> Items { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public virtual Country Country { get; set; }
+    }
+}
