@@ -11,6 +11,6 @@ namespace TradingPlatformTest.Repositories
     {
         public string UserCurrency(string username);
 
-
+        public decimal UserCurrencyRate(string username);
     }
 }

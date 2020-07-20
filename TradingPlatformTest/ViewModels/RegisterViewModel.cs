@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TradingPlatformTest.Models;
 
 namespace TradingPlatformTest.ViewModel
 {
@@ -10,7 +12,7 @@ namespace TradingPlatformTest.ViewModel
     {
         [Required]
         [Display(Name = "Name")]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -29,5 +31,9 @@ namespace TradingPlatformTest.ViewModel
         public string PasswordConfirm { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public List<SelectListItem> Countires { get; set; }
+        
+        public string CountryName { get; set; }
     }
 }

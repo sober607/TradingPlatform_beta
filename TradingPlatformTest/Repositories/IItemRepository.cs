@@ -10,5 +10,9 @@ namespace TradingPlatformTest.Repositories
     public interface IItemRepository
     {
         public Task AddItem(ItemAddViewModel item);
+
+        public IEnumerable<Item> GetCategorisedItems(int categoryId);
+
+        public Item GetItem(int itemId);
     }
 }

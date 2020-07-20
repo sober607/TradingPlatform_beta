@@ -18,8 +18,18 @@ namespace TradingPlatformTest.Repositories
 
         public string UserCurrency(string username)
         {
-            var user = _context.Users.FirstOrDefault(t => t.UserName == "username");
+            var user = _context.Users.FirstOrDefault(t => t.UserName.Contains(username));
+            
             var userCurrencyNameShort = user.Country.Currency.ShortName;
+
+            return userCurrencyNameShort;
+        }
+
+        public decimal UserCurrencyRate (string username)
+        {
+            var user = _context.Users.FirstOrDefault(t => t.UserName == username);
+
+            var userCurrencyNameShort = user.Country.Currency.Rate;
 
             return userCurrencyNameShort;
         }

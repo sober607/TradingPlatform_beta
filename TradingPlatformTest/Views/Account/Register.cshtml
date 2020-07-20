@@ -9,9 +9,15 @@
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="All"></div>
     <div>
-        <label asp-for="UserName"></label><br />
-        <input asp-for="UserName" />
-        <span asp-validation-for="UserName"></span>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="CountryName"></label><br />
+        <select asp-for="CountryName" asp-items="Model.Countires" ></select>
+        
     </div>
 
     <div>

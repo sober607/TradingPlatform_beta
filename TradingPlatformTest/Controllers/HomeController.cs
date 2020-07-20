@@ -5,7 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TradingPlatformTest.Infrastructure.BackgroundServices.Interfaces;
+using TradingPlatformTest.Infrastructure.Services.Interfaces;
 using TradingPlatformTest.Models;
+using TradingPlatformTest.Repositories;
 
 namespace TradingPlatformTest.Controllers
 {
@@ -13,13 +16,20 @@ namespace TradingPlatformTest.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private ICategoryRepository _categoryRepository;
+
+        
+
+        public HomeController(ILogger<HomeController> logger, ICategoryRepository categoryRepository)
         {
             _logger = logger;
+            _categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
+            ViewBag.Categories = _categoryRepository.GetAllCategories();
+            
             return View();
         }
 

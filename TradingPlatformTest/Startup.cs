@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using TradingPlatformTest.Infrastructure;
+using TradingPlatformTest.Infrastructure.BackgroundServices.Implementations;
+using TradingPlatformTest.Infrastructure.BackgroundServices.Interfaces;
+using TradingPlatformTest.Infrastructure.Services.Implementations;
+using TradingPlatformTest.Infrastructure.Services.Interfaces;
 using TradingPlatformTest.Models;
 using TradingPlatformTest.Repositories;
 
@@ -31,6 +37,16 @@ namespace TradingPlatformTest
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<TradingPlatformContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+            });
+
             services.AddControllersWithViews();
 
             services.AddScoped<IUserRepository, SqlUserRepository>();
@@ -39,7 +55,17 @@ namespace TradingPlatformTest
 
             services.AddScoped<IItemRepository, SqlItemRepository>();
 
-           
+            services.AddScoped<ICountriesRepository, SqlCountriesRepository>();
+
+            services.AddScoped<ICategoryRepository, SqlCategoryRepository> ();
+
+            services.AddScoped<IServiceRestClient, ServiceRestClient> ();
+
+            services.AddScoped<ISynchroniseCurrencyRate, SynchroniseCurrencyRate> ();
+
+            //services.AddHostedService<SyncCurrencyRateBackgroundService>(); // commented due to API requests limitations
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,20 +86,24 @@ namespace TradingPlatformTest
             app.UseAuthentication();    
             app.UseAuthorization();
 
-            app.Use((request, next) =>
-            {
-                TradingPlatformContext dbContext = request.RequestServices.GetRequiredService<TradingPlatformContext>();
+            //app.Use((request, next) =>
+            //{
+            //    TradingPlatformContext dbContext = request.RequestServices.GetRequiredService<TradingPlatformContext>();
+            //    var countries = new CurrencyRate();
+            //    using (StreamReader r = new StreamReader(@"C:\temp\currencyrate.json"))
+            //    {
+            //        string json = r.ReadToEnd();
+            //        countries = JsonConvert.DeserializeObject<CurrencyRate>(json);
+            //    }
 
-                var country = dbContext.Countries.FirstOrDefault(t => t.Name == "United States");
+               
+            //        dbContext.CurrencyRate.Add(countries);
+                
 
-                City city = new City() { Name="Washington", Country = country };
-   
-                dbContext.Cities.Add(city);
+            //    dbContext.SaveChanges();
 
-                dbContext.SaveChanges();
-
-                return next();
-            });
+            //    return next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {

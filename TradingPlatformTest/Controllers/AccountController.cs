@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TradingPlatformTest.Models;
+using TradingPlatformTest.Repositories;
 using TradingPlatformTest.ViewModel;
 
 namespace TradingPlatformTest.Controllers
@@ -12,27 +14,43 @@ namespace TradingPlatformTest.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<User> _signInManager;
+
         private readonly UserManager<User> _userManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public ICountriesRepository _countriesRepository { get; set; }
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICountriesRepository countriesRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _countriesRepository = countriesRepository;
         }
 
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            var countries =  _countriesRepository.GetAllCountries();
+            int i = 0;
+            model.Countires = new List<SelectListItem>();
+
+            foreach (var t in countries)
+            {
+                model.Countires.Add(new SelectListItem() { Text = t.Name, Value = t.Name} );
+                i++;
+            }
+
+            return View(model);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.UserName, Email = model.Email };
+                var user = new User() { UserName = model.Email, Email = model.Email, Name = model.Name, Country = _countriesRepository.FindCountryByName(model.CountryName) };
                 var createTask = await _userManager.CreateAsync(user, model.Password);
 
                 if (createTask.Succeeded)
@@ -47,8 +65,25 @@ namespace TradingPlatformTest.Controllers
                         ModelState.AddModelError("", t.Description);
                     }
                 }
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                var model1 = new RegisterViewModel();
+                var countries = _countriesRepository.GetAllCountries();
+                int i = 0;
+                model1.Countires = new List<SelectListItem>();
+
+                foreach (var t in countries)
+                {
+                    model1.Countires.Add(new SelectListItem() { Text = t.Name, Value = t.Name });
+                    i++;
+                }
+
+                return View(model1);
+            }
+
+            
         }
 
 

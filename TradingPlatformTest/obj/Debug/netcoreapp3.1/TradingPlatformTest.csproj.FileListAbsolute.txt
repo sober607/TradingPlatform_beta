@@ -147,7 +147,10 @@ C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\bin\Debug\ne
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
-C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\TradingPlatformTest.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\Razor\Views\Item\AddItem.cshtml.g.cs
+C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\Razor\Views\Items\Category.cshtml.g.cs
+C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\Razor\Views\Item\ViewItem.cshtml.g.cs
+C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\bin\Debug\netcoreapp3.1\RestSharp.dll
+C:\Users\Admin\source\repos\TradingPlatformTest\TradingPlatformTest\obj\Debug\netcoreapp3.1\TradingPlatformTest.MvcApplicationPartsAssemblyInfo.cache

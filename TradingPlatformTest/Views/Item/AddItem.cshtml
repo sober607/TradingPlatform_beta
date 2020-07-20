@@ -17,7 +17,7 @@
             <div asp-validation-summary="All"></div>
             <div>
                 <label asp-for="Name"></label><br />
-                <input type="text" /><br />
+                <input type="text" asp-for="Name" /><br />
             </div>
 
             <div>
@@ -27,23 +27,28 @@
 
             <div>
                 <label asp-for="File">Upload image</label><br />
-                <input type="file" name="Upload" /><br />
+                <input type="file" asp-for="File" asp-validation-for="File" /><br />
             </div>
 
+            <div>
+                <label asp-for="Price">Price, @ViewData["Currency"]</label><br />
+                <input type="number" asp-for="Price" /><br />
+            </div>
 
             <div>
-                <label asp-for="File">Price, @ViewData["Currency"]</label><br />
-                <input type="number" name="Price" /><br />
+                <label asp-for="CategoryId"></label><br />
+                <select asp-for="CategoryId" asp-items="Model.Categories"></select>
+
             </div>
 
             <div>
                 <label asp-for="IsService">Is this a service?</label><br />
-                <input type="checkbox" name="Service" /><br />
+                <input type="checkbox" asp-for="IsService" /><br />
             </div>
 
             <div>
                 <label asp-for="IsMultiCountryPossible">Is shipment/execution to another country possible?</label><br />
-                <input type="checkbox" name="MultiCountry" /><br />
+                <input type="checkbox" asp-for="IsMultiCountryPossible" /><br />
             </div>
 
             <div>

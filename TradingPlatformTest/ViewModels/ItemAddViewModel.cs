@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace TradingPlatformTest.ViewModels
         public IFormFile File { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Display(Name = "Is this service?")]
         public bool IsService { get; set; }
@@ -28,8 +29,11 @@ namespace TradingPlatformTest.ViewModels
         public bool IsMultiCountryPossible { get; set; }
 
         public string UserName { get; set; }
-        
-        [Required]
+
+        public int CategoryId { get; set; }
+
+        public List<SelectListItem> Categories { get; set; }
+
         public Country Country { get; set; }
 
        public Status Status { get; set; }

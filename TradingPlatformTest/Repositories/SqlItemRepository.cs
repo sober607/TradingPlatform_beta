@@ -12,7 +12,7 @@ namespace TradingPlatformTest.Repositories
     {
         public IFileService _fileService { get; set; }
 
-        public TradingPlatformContext _context { get; set; }
+        private TradingPlatformContext _context { get; set; }
 
         public SqlItemRepository (IFileService fileService, TradingPlatformContext context)
         {
@@ -31,12 +31,27 @@ namespace TradingPlatformTest.Repositories
                 Price = item.Price,
                 User = (user != null) ? user : null,
                 IsService = item.IsService,
+                Category = _context.Categories.FirstOrDefault( t => t.Id == item.CategoryId),
                 IsMultiCountryPossible = item.IsMultiCountryPossible
             };
 
             _context.Items.Add(newItem);
             _context.SaveChanges();
 
+        }
+
+        public IEnumerable<Item> GetCategorisedItems(int categoryId)
+        {
+            var itemsList = _context.Items.Where(t => t.CategoryId == categoryId).ToList();
+
+            return itemsList;
+        }
+
+        public Item GetItem(int itemId)
+        {
+            var item = _context.Items.FirstOrDefault(t=> t.Id == itemId);
+
+            return item;
         }
     }
 }

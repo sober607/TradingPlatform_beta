@@ -24,7 +24,7 @@ namespace TradingPlatformTest.Infrastructure
         public string GenerateItemFileName(string fileName)
         {
             string extension = Path.GetExtension(fileName);
-            string newFileName = $@"{Guid.NewGuid()}.{extension}";
+            string newFileName = $@"{Guid.NewGuid()}{extension}";
             
             return newFileName;
         }

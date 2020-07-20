@@ -16,10 +16,10 @@ namespace TradingPlatformTest.Models
         [Required]
         public string Description { get; set; }
 
-        public string ImgUrl { get; set; }
+        public string? ImgUrl { get; set; }
         
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
 
         [Display(Name = "Is this service?")]

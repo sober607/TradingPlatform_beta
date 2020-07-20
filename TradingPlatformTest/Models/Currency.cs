@@ -17,6 +17,10 @@ namespace TradingPlatformTest.Models
 
         public int? Code { get; set; }
 
+        public decimal Rate { get; set; }
+
+        public string RateLastSyncTime { get; set; }
+
         public virtual List<Country> Countries { get; set; }
     }
 }

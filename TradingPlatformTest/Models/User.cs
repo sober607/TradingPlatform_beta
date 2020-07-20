@@ -8,6 +8,7 @@ namespace TradingPlatformTest.Models
 {
     public class User : IdentityUser
     {
+        public string Name { get; set; }
 
         public virtual List<Item> Items { get; set; }
 
